@@ -1,5 +1,6 @@
 export * from './Button'
 export * from './Container'
+export * from './GorhomBottomSheet'
 export * from './Icon'
 export * from './Image'
 export * from './Switch'
