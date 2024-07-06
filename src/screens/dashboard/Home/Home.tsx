@@ -1,14 +1,13 @@
-import { View } from 'react-native'
+import { Container } from '@/components/Container'
+import { Text } from '@/components/Text'
+import { useTimer } from '@/hooks/useTimer'
 
-import { Container } from '@/components/atomic/Container'
-import { Text } from '@/components/atomic/Text'
+export default function Home(props: any) {
+  const { counter } = useTimer(60)
 
-const Home = (props: any) => {
   return (
     <Container>
-      <Text>Home</Text>
+      <Text>{counter}</Text>
     </Container>
   )
 }
-
-export default Home

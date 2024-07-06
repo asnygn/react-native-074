@@ -4,7 +4,7 @@ import { AppState } from 'react-native'
 export const useTimer = (
   seconds: number,
   timerIntervalInMilliseconds: number = 1000,
-  onTimerFinished: () => void
+  onTimerFinished?: () => void
 ) => {
   const [appState, setAppState] = useState(AppState.currentState)
   const [counter, setCounter] = useState(seconds)
