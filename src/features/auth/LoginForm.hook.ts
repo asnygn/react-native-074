@@ -22,14 +22,14 @@ const loginSchema = z.object({
 
 type LoginSchemaType = z.infer<typeof loginSchema>
 
-export function useLoginForm() {
+export const useLoginForm = () => {
   const loginForm = useForm<LoginSchemaType>({
     resolver: zodResolver(loginSchema),
     defaultValues: {},
     mode: 'onBlur',
   })
 
-  function submitForm(data: SubmitHandler<LoginSchemaType>) {
+  const submitForm = (data: SubmitHandler<LoginSchemaType>) => {
     console.log(data)
   }
 
