@@ -1,6 +1,5 @@
-import { Container } from '@/components/Container'
-import { Text } from '@/components/Text'
-import { useTimer } from '@/hooks/useTimer'
+import { Container, Text, Switch, Icon } from '@/components'
+import { useTimer } from '@/hooks'
 
 export default function Home(props: any) {
   const { counter } = useTimer(60)
@@ -8,6 +7,8 @@ export default function Home(props: any) {
   return (
     <Container>
       <Text>{counter}</Text>
+      <Switch />
+      <Icon name="Person" />
     </Container>
   )
 }

@@ -16,7 +16,7 @@ export type TextFieldProps = TextInputProps & {
   rightIcon?: React.ReactNode
   errorMessage?: string
   labelStyle?: TextStyle
-  textInputContainer?: ViewStyle
+  textInputContainerStyle?: ViewStyle
   textInputStyle?: ViewStyle
 }
 
@@ -27,7 +27,7 @@ export const TextField = (props: TextFieldProps) => {
     rightIcon,
     errorMessage,
     labelStyle = {},
-    textInputContainer = {},
+    textInputContainerStyle = {},
     textInputStyle = {},
     ...otherProps
   } = props
@@ -43,7 +43,7 @@ export const TextField = (props: TextFieldProps) => {
   return (
     <View>
       {label && <Text style={[labelStyle]}>{label}</Text>}
-      <View style={[textInputContainer]}>
+      <View style={[textInputContainerStyle]}>
         {leftIcon && <View style={styles.leftIcon}>{leftIcon}</View>}
         <TextInput
           style={[styles.textInput, dynamicTextInputStyle]}
