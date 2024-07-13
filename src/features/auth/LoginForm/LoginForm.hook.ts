@@ -28,10 +28,8 @@ export const useLoginForm = () => {
     defaultValues: {},
     mode: 'onBlur',
   })
-
   const submitForm = (data: SubmitHandler<LoginSchemaType>) => {
     console.log(data)
   }
-
   return { loginForm, submitForm }
 }

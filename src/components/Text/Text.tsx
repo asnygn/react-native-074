@@ -5,23 +5,25 @@ import {
   StyleSheet,
 } from 'react-native'
 
-import { useStyle } from '@/hooks/useStyle'
+import { useStyle, useTheme } from '@/hooks'
 import { light } from '@/themes/light'
 
 type TextProps = RNTextProps & {
-  // fontFamily?: keyof typeof light.fonts
-  // fontWeight?: keyof typeof light.fonts.Inter
+  fontFamily?: keyof typeof light.fonts
+  fontWeight?: keyof typeof light.fonts.Poppins
   fontSize?: number
   color?: string
   textAlign?: 'left' | 'right' | 'center' | 'justify'
 }
 
 export const Text = (props: React.PropsWithChildren<TextProps>) => {
-  const { style, children, ...otherProps } = props
+  const { style, children, fontWeight = 400, ...otherProps } = props
+  const { theme } = useTheme()
   const styles = useStyle(createStyle)
+  const fontFamily = theme.fonts.Poppins[fontWeight]
   return (
     <RNText
-      style={[styles.text, style]}
+      style={[styles.text, { fontFamily }, style]}
       allowFontScaling={false}
       {...otherProps}
     >
@@ -33,8 +35,8 @@ export const Text = (props: React.PropsWithChildren<TextProps>) => {
 const createStyle = (theme: MyTheme) => {
   const styles = StyleSheet.create({
     text: {
-      // fontFamily: theme.fonts.Inter[500],
-      // fontSize: theme.text.fontsize,
+      fontFamily: theme.fonts.Poppins[400],
+      fontSize: theme.text.fontSize,
       color: theme.text.color,
     },
   })

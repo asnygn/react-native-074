@@ -7,6 +7,8 @@ export default function Home(props: any) {
   return (
     <Container>
       <Text>{counter}</Text>
+      <Text>Hello World</Text>
+      <Text fontWeight="900">Hello World</Text>
       <Switch />
       <Icon name="Person" />
     </Container>
