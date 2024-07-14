@@ -1,15 +1,19 @@
 import React from 'react'
 
-import { light } from '@/themes/light'
-import { dark } from '@/themes/dark'
+import { usePersistStore } from '@/stores'
+import { themes } from '@/themes'
 
 type ProviderValue = {
   theme: MyTheme
+  changeTheme: (name: 'light' | 'dark') => void
   toggleTheme: () => void
 }
 
 export const ThemeContext = React.createContext<ProviderValue>({
-  theme: light,
+  theme: themes.light,
+  changeTheme: () => {
+    console.log('ThemeProvider is not rendered!')
+  },
   toggleTheme: () => {
     console.log('ThemeProvider is not rendered!')
   },
@@ -21,27 +25,42 @@ type ThemeProviderProps = {
 }
 
 export const ThemeProvider = React.memo<ThemeProviderProps>((props) => {
-  const [theme, setTheme] = React.useState<MyTheme>(props.initial)
+  const [themeConfig, setThemeConfig] = React.useState<MyTheme>(props.initial)
+  const { setTheme } = usePersistStore()
 
   const toggleThemeCallback = React.useCallback(() => {
-    setTheme((currentTheme) => {
+    setThemeConfig((currentTheme) => {
       if (currentTheme.id === 'light') {
-        return dark
+        setTheme('dark')
+        return themes.dark
       }
       if (currentTheme.id === 'dark') {
-        return light
+        setTheme('light')
+        return themes.light
       }
       return currentTheme
     })
   }, [])
 
+  const changeThemeCallback = React.useCallback((themeName: any) => {
+    if (themeName === 'light') {
+      setThemeConfig(themes.light)
+      setTheme('light')
+    }
+    if (themeName === 'dark') {
+      setThemeConfig(themes.dark)
+      setTheme('dark')
+    }
+  }, [])
+
   const memoizedValue = React.useMemo(() => {
     const value: ProviderValue = {
-      theme,
+      theme: themeConfig,
+      changeTheme: changeThemeCallback,
       toggleTheme: toggleThemeCallback,
     }
     return value
-  }, [theme, toggleThemeCallback])
+  }, [themeConfig, changeThemeCallback, toggleThemeCallback])
 
   return (
     <ThemeContext.Provider value={memoizedValue}>

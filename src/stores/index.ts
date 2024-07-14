@@ -3,7 +3,7 @@ import { persist, createJSONStorage, StateStorage } from 'zustand/middleware'
 import { MMKV } from 'react-native-mmkv'
 
 const storage = new MMKV({
-  id: 'myapp',
+  id: 'app',
 })
 
 const zustandStorage: StateStorage = {
@@ -18,6 +18,36 @@ const zustandStorage: StateStorage = {
     return storage.delete(name)
   },
 }
+
+export const usePersistStore = create(
+  persist(
+    (set, get) => ({
+      authUser: null,
+      theme: 'dark',
+      setAuthUser: (data: any) => set((state) => ({ authUser: data })),
+      setTheme: (data: any) => set((state) => ({ theme: data })),
+    }),
+    {
+      name: 'settings',
+      storage: createJSONStorage(() => zustandStorage),
+    }
+  )
+)
+
+export const useSettingsStore = create(
+  persist(
+    (set, get) => ({
+      settings: {
+        theme: 'light',
+      },
+      setAuthUser: (data: any) => set((state) => ({ authUser: data })),
+    }),
+    {
+      name: 'settings',
+      storage: createJSONStorage(() => zustandStorage),
+    }
+  )
+)
 
 export const useAuthStore = create(
   persist(
