@@ -25,39 +25,11 @@ export const usePersistStore = create(
       authUser: null,
       theme: 'dark',
       setAuthUser: (data: any) => set((state) => ({ authUser: data })),
+      removeAuthUser: () => set({ authUser: null }),
       setTheme: (data: any) => set((state) => ({ theme: data })),
     }),
     {
       name: 'settings',
-      storage: createJSONStorage(() => zustandStorage),
-    }
-  )
-)
-
-export const useSettingsStore = create(
-  persist(
-    (set, get) => ({
-      settings: {
-        theme: 'light',
-      },
-      setAuthUser: (data: any) => set((state) => ({ authUser: data })),
-    }),
-    {
-      name: 'settings',
-      storage: createJSONStorage(() => zustandStorage),
-    }
-  )
-)
-
-export const useAuthStore = create(
-  persist(
-    (set, get) => ({
-      authUser: null,
-      setAuthUser: (data: any) => set((state) => ({ authUser: data })),
-      removeAuthUser: () => set({ authUser: null }),
-    }),
-    {
-      name: 'auth',
       storage: createJSONStorage(() => zustandStorage),
     }
   )
