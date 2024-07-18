@@ -19,8 +19,16 @@ const zustandStorage: StateStorage = {
   },
 }
 
+type PersistStoreState = {
+  authUser: null | {}
+  theme: string
+  setAuthUser: (data: {}) => void
+  removeAuthUser: () => void
+  setTheme: (data: string) => void
+}
+
 export const usePersistStore = create(
-  persist(
+  persist<PersistStoreState>(
     (set, get) => ({
       authUser: null,
       theme: 'dark',

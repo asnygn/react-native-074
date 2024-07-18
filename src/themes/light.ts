@@ -22,6 +22,9 @@ export const light = {
     fontSize: 16,
     color: '#000',
   },
+  icon: {
+    color: '#000',
+  },
   button: {
     fontSize: 16,
     color: '#fff',

@@ -19,7 +19,7 @@ export const Icon = (props: IconProps) => {
   const { theme } = useTheme()
 
   const IconComponent = iconMapping[name]
-  const iconColor = color ? color : theme.id === 'dark' ? '#fff' : '#000'
+  const iconColor = color || theme.icon.color
 
   if (IconComponent) {
     return <IconComponent width={size} height={size} color={iconColor} />
